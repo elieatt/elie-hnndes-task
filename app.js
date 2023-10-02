@@ -14,6 +14,18 @@ sequelize.sync();
 
 app.use('/notes', noteRoutes);
 
+app.use((req, res, next) => {
+    const error = new Error();
+    error.message ="NOT FOUND";
+    error.status = 404;
+    next(error);
+});
+
+
+app.use((error, req, res, next) => {
+    console.log(error);
+    res.status(error.status || 500).json({ error: error.message });
+})
 
 app.listen(PORT, () => {
     console.log(`server is running on port ${PORT}`);
