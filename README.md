@@ -39,7 +39,7 @@ To get started with the API, follow the steps below:
 - `GET /notes/:id`: Retrieve a specific note by ID.
 - `DELETE /notes/:id`: Delete a specific note by ID.
 
-### Author
+### Authors
 
 - `POST /authors/signup`: Create a new author account.
 - `POST /authors/login`: Authenticate an author and generate JWT tokens.
