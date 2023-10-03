@@ -86,9 +86,9 @@ To create a new author account, send a POST request to the `/authors/signup` end
 
 ```json
 {
-  "name": "Test Tester",
   "email": "test@tester.com",
-  "password": "password"
+  "password": "password",
+  "username": "Test Tester",
 }
 ```
 
