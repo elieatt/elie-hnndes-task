@@ -1,22 +1,26 @@
 const express = require('express');
-const bodyParse = require('body-parser');
-const morgan = require('morgan');
-const { sequelize } = require('./api/models/index');
-const noteRoutes = require('./api/routes/note_routes')
-
-const PORT = process.env.PORT || 3000;
+const bodyParser = require('body-parser');
+const morgan = require("morgan");
+const sequelize = require('./database');
+const authorRoutes = require('./api/routes/author_routes');
+const noteRoutes = require('./api/routes/note_routes');
+const auth_check= require('./api/middlewares/auth_check_middleware');
 
 const app = express();
-app.use(bodyParse.json());
-app.use(morgan("dev"));
-
+const PORT = process.env.PORT || 3000;
 sequelize.sync();
 
-app.use('/notes', noteRoutes);
+app.use(morgan("dev"));
+
+app.use(bodyParser.json());
+
+app.use('/authors', authorRoutes);
+
+app.use('/notes',auth_check,noteRoutes);
 
 app.use((req, res, next) => {
     const error = new Error();
-    error.message ="NOT FOUND";
+    error.message = "NOT FOUND";
     error.status = 404;
     next(error);
 });

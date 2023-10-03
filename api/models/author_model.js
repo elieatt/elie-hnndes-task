@@ -1,8 +1,27 @@
-const { sequelize, DataTypes } = require('./index');
+const { DataTypes } = require('sequelize');
+const sequelize = require('../../database');
 
-// Define model
 const Author = sequelize.define('Author', {
-  name: DataTypes.STRING,
+  email: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    unique: true,
+    validate: {
+        isEmail: {
+          args: true,
+          msg: 'Invalid email format',
+        },
+      },
+  },
+  password: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  username: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  
 });
 
 module.exports = Author;

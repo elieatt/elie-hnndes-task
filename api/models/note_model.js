@@ -1,20 +1,18 @@
-const { sequelize, DataTypes } = require('./index');
+const { DataTypes } = require('sequelize');
+const sequelize = require('../../database');
 const Author = require('./author_model');
 
-// Define model
 const Note = sequelize.define('Note', {
-  title: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  content: {
-    type: DataTypes.TEXT,
-    allowNull: false,
-  },
+    title: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+    content: {
+        type: DataTypes.STRING,
+        allowNull: false,
 
+    }
 });
-
 Note.belongsTo(Author);
 Author.hasMany(Note);
-
 module.exports = Note;
